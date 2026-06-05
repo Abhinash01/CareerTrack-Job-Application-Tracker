@@ -415,3 +415,107 @@ body.light-mode .stat-card {
     grid-template-columns: 1fr;
   }
 }
+
+/* ================= LOGIN PAGE ================= */
+
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card-color);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.auth-header p {
+    color: var(--muted-text);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-color);
+    outline: none;
+}
+
+.password-box {
+    display: flex;
+    gap: 10px;
+}
+
+.show-btn {
+    padding: 0 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-options a {
+    color: var(--primary);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-footer a {
+    color: var(--primary);
+}

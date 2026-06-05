@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | CareerTrack</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <section class="auth-section">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <h1>Welcome Back 👋</h1>
+                <p>Login to continue your career journey.</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+
+                    <div class="password-box">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        />
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="show-btn"
+                        >
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+
+                    <label class="remember">
+                        <input type="checkbox" />
+                        Remember Me
+                    </label>
+
+                    <a href="#">Forgot Password?</a>
+
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    Don't have an account?
+                    <a href="register.html">Register</a>
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="js/auth.js"></script>
+
+</body>
+</html>
