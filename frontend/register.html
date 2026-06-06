@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | CareerTrack</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">CT</div>
+        <span>CareerTrack</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" class="login-btn">Login</a></li>
+        <li><a href="register.html" class="register-btn active-nav">Register</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="themeToggle">🌙</button>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </nav>
+  </header>
+
+  <section class="auth-section auth-split">
+
+    <div class="auth-info">
+      <div class="info-badge">✨ Start Your Career Journey</div>
+
+      <h1>Create your account and organize your job search.</h1>
+
+      <p>
+        Track internships, interviews, offers, rejections, notes and reminders
+        using one powerful career dashboard.
+      </p>
+
+      <div class="auth-stats">
+        <div>
+          <h3>100%</h3>
+          <span>Organized Tracking</span>
+        </div>
+        <div>
+          <h3>24/7</h3>
+          <span>Access Anywhere</span>
+        </div>
+        <div>
+          <h3>Free</h3>
+          <span>For Students</span>
+        </div>
+      </div>
+
+      <div class="info-points">
+        <p>✅ Save every application in one place</p>
+        <p>✅ Track interview dates and status</p>
+        <p>✅ View progress using dashboard analytics</p>
+        <p>✅ Secure account with authentication</p>
+      </div>
+      <div class="auth-feature-box">
+  <h3>Why CareerTrack?</h3>
+
+  <div class="mini-feature">
+    <span>📊</span>
+    <div>
+      <h4>Visual Progress</h4>
+      <p>Understand your job search journey with clear status insights.</p>
+    </div>
+  </div>
+
+  <div class="mini-feature">
+    <span>⏰</span>
+    <div>
+      <h4>Smart Reminders</h4>
+      <p>Stay updated about interview dates and follow-up tasks.</p>
+    </div>
+  </div>
+
+  <div class="mini-feature">
+    <span>🔐</span>
+    <div>
+      <h4>Secure Data</h4>
+      <p>Your applications and notes stay protected inside your account.</p>
+    </div>
+  </div>
+    </div>
+    </div>
+
+    <div class="auth-card">
+
+      <div class="auth-logo">
+        <div class="logo-icon">CT</div>
+      </div>
+
+      <div class="auth-header">
+        <h1>Create Account 🚀</h1>
+        <p>Register to start tracking your career progress.</p>
+      </div>
+
+      <div class="social-login">
+        <button type="button" class="google-btn">
+          <i class="fa-brands fa-google"></i>
+          Continue with Google
+        </button>
+
+        <button type="button" class="linkedin-btn">
+          <i class="fa-brands fa-linkedin"></i>
+          Continue with LinkedIn
+        </button>
+      </div>
+
+      <div class="divider">
+        <span>or register with email</span>
+      </div>
+
+      <form id="registerForm">
+
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter your full name" required />
+          <small class="error-message" id="nameError"></small>
+        </div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" id="registerEmail" placeholder="Enter your email" required />
+          <small class="error-message" id="emailError"></small>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+
+          <div class="password-box">
+            <input type="password" id="registerPassword" placeholder="Create password" required />
+            <button type="button" id="toggleRegisterPassword" class="show-btn">Show</button>
+          </div>
+
+          <div class="strength-box">
+            <div class="strength-bar">
+              <span id="strengthFill"></span>
+            </div>
+            <small id="strengthText">Password strength</small>
+          </div>
+
+          <small class="error-message" id="passwordError"></small>
+        </div>
+
+        <div class="input-group">
+          <label>Confirm Password</label>
+
+          <div class="password-box">
+            <input type="password" id="confirmPassword" placeholder="Confirm password" required />
+            <button type="button" id="toggleConfirmPassword" class="show-btn">Show</button>
+          </div>
+
+          <small class="error-message" id="confirmError"></small>
+        </div>
+
+        <label class="terms-check">
+          <input type="checkbox" id="termsCheck" />
+          I agree to the <a href="terms.html">Terms & Conditions</a> and
+          <a href="privacy.html">Privacy Policy</a>
+        </label>
+
+        <small class="error-message" id="termsError"></small>
+
+        <button type="submit" class="auth-btn" id="registerBtn">
+          Create Account
+        </button>
+
+      </form>
+
+      <div class="auth-footer">
+        <p>
+          Already have an account?
+          <a href="login.html">Login</a>
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    <div>
+      <h3>Career<span>Track</span></h3>
+      <p>Track. Apply. Succeed.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+
+    <p class="copyright">© 2026 CareerTrack. All Rights Reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

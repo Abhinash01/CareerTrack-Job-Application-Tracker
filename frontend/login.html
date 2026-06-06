@@ -6,78 +6,186 @@
     <title>Login | CareerTrack</title>
 
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+<header class="header">
+    <nav class="navbar">
 
-    <section class="auth-section">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">CT</div>
+            <span>CareerTrack</span>
+        </a>
 
-        <div class="auth-card">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+            <li><a href="register.html" class="register-btn">Register</a></li>
+            
+        </ul>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
 
-            <div class="auth-header">
-                <h1>Welcome Back!</h1>
-                <p>Login to continue your career journey.</p>
-            </div>
+    </nav>
+</header>
+    <section class="auth-section auth-split">
 
-            <form id="loginForm">
+  <div class="auth-info">
+    <div class="info-badge">🚀 Career Management Platform</div>
 
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        required
-                    />
-                </div>
+    <h1>Track every opportunity with confidence.</h1>
 
-                <div class="input-group">
-                    <label>Password</label>
+    <p>
+      Manage job applications, interview schedules, offers, rejections,
+      and reminders from one clean dashboard.
+    </p>
 
-                    <div class="password-box">
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Enter your password"
-                            required
-                        />
+    <div class="auth-stats">
+      <div>
+        <h3>10K+</h3>
+        <span>Applications Tracked</span>
+      </div>
+      <div>
+        <h3>500+</h3>
+        <span>Active Users</span>
+      </div>
+      <div>
+        <h3>95%</h3>
+        <span>Better Organization</span>
+      </div>
+    </div>
 
-                        <button
-                            type="button"
-                            id="togglePassword"
-                            class="show-btn"
-                        >
-                            Show
-                        </button>
-                    </div>
-                </div>
+    <div class="info-points">
+      <p>✅ Interview reminders</p>
+      <p>✅ Application status tracking</p>
+      <p>✅ Secure personal dashboard</p>
+    </div>
+    <div class="auth-feature-box">
+  <h3>Why CareerTrack?</h3>
 
-                <div class="form-options">
+  <div class="mini-feature">
+    <span>📊</span>
+    <div>
+      <h4>Visual Progress</h4>
+      <p>Understand your job search journey with clear status insights.</p>
+    </div>
+  </div>
 
-                    <label class="remember">
-                        <input type="checkbox" />
-                        Remember Me
-                    </label>
+  <div class="mini-feature">
+    <span>⏰</span>
+    <div>
+      <h4>Smart Reminders</h4>
+      <p>Stay updated about interview dates and follow-up tasks.</p>
+    </div>
+  </div>
 
-                    <a href="#">Forgot Password?</a>
+  <div class="mini-feature">
+    <span>🔐</span>
+    <div>
+      <h4>Secure Data</h4>
+      <p>Your applications and notes stay protected inside your account.</p>
+    </div>
+  </div>
+</div>
+  </div>
 
-                </div>
+  <div class="auth-card">
 
-                <button type="submit" class="auth-btn">
-                    Login
-                </button>
+    <div class="auth-logo">
+      <div class="logo-icon">CT</div>
+    </div>
 
-            </form>
+    <div class="auth-header">
+      <h1>Welcome Back 👋</h1>
+      <p>Login to continue your career journey.</p>
+    </div>
 
-            <div class="auth-footer">
-                <p>
-                    Don't have an account?
-                    <a href="register.html">Register</a>
-                </p>
-            </div>
+<div class="social-login">
 
+    <button type="button" class="google-btn">
+        <i class="fa-brands fa-google"></i>
+        Continue with Google
+    </button>
+
+    <button type="button" class="linkedin-btn">
+        <i class="fa-brands fa-linkedin"></i>
+        Continue with LinkedIn
+    </button>
+
+</div>
+    <div class="divider">
+      <span>or login with email</span>
+    </div>
+
+    <form id="loginForm">
+
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required />
+        <small class="error-message" id="emailError"></small>
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+
+        <div class="password-box">
+          <input type="password" id="password" placeholder="Enter your password" required />
+
+          <button type="button" id="togglePassword" class="show-btn">
+            Show
+          </button>
         </div>
 
-    </section>
+        <small class="error-message" id="passwordError"></small>
+      </div>
 
+      <div class="form-options">
+        <label class="remember">
+          <input type="checkbox" />
+          Remember Me
+        </label>
+
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="auth-btn" id="loginBtn">
+        Login
+      </button>
+
+    </form>
+
+    <div class="auth-footer">
+      <p>
+        Don't have an account?
+        <a href="register.html">Register</a>
+      </p>
+    </div>
+
+  </div>
+
+</section>
+    <footer class="footer">
+
+    <div>
+        <h3>Career<span>Track</span></h3>
+        <p>Track. Apply. Succeed.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 CareerTrack. All Rights Reserved.
+    </p>
+
+</footer>
+
+    <script src="js/main.js"></script>
     <script src="js/auth.js"></script>
 
 </body>
