@@ -1380,3 +1380,108 @@ body.light-mode .stat-card {
     padding: 22px;
   }
 }
+
+/* ==================================================
+   ADD APPLICATION PAGE
+   Cognifyz Task 1: HTML Form Structure
+   Cognifyz Task 2: Client-side Validation Ready
+   Cognifyz Task 5: CRUD Create Operation UI
+================================================== */
+
+.form-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+.form-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 35px;
+}
+
+.form-hero h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.form-hero p {
+  color: var(--muted-text);
+  line-height: 1.7;
+}
+
+.application-form-card {
+  background: var(--card-color);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 35px;
+  box-shadow: 0 25px 60px var(--shadow);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-color);
+  outline: none;
+}
+
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--primary);
+}
+
+.input-group select option {
+  background: var(--card-color);
+  color: var(--text-color);
+}
+
+.input-group textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.form-actions .auth-btn,
+.form-actions .secondary-btn {
+  width: auto;
+  min-width: 170px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .form-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .auth-btn,
+  .form-actions .secondary-btn {
+    width: 100%;
+  }
+}
