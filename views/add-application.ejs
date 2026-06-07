@@ -10,24 +10,7 @@
 </head>
 <body>
 
-<header class="header">
-  <nav class="navbar">
-    <a href="/" class="logo">
-      <div class="logo-icon">CT</div>
-      <span>CareerTrack</span>
-    </a>
-
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/dashboard">Dashboard</a></li>
-      <li><a href="/applications">Applications</a></li>
-      <li><a href="/add-application" class="active-nav">Add Application</a></li>
-      <li><a href="/profile">Profile</a></li>
-      <li><a href="/login" class="login-btn">Logout</a></li>
-    </ul>
-
-    <button class="menu-btn" id="menuBtn">☰</button>
-  </nav>
-</header>
+<%- include("./partials/app-navbar") %>
 
 <main class="form-page">
 
@@ -148,21 +131,7 @@
 
 </main>
 
-<footer class="footer">
-  <div>
-    <h3>Career<span>Track</span></h3>
-    <p>Track. Apply. Succeed.</p>
-  </div>
-
-  <div class="footer-links">
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/terms">Terms</a>
-    <a href="/privacy">Privacy</a>
-  </div>
-
-  <p class="copyright">© 2026 CareerTrack. All Rights Reserved.</p>
-</footer>
+<%- include("./partials/footer") %>
 
 <script src="js/main.js"></script>
 <script src="js/applications.js"></script>
