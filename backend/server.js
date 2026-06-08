@@ -1,9 +1,16 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 
+const connectDB = require("./config/db");
+
 const app = express();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
+// Database Connection
+connectDB();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -16,7 +23,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
-// Routes
+// Page Routes
 app.get("/", (req, res) => {
   res.render("index");
 });
