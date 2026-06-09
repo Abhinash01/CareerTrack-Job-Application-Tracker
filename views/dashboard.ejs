@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard | CareerTrack</title>
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
 </head>
 <body>
 
@@ -16,7 +17,7 @@
   <section class="dashboard-hero">
     <div>
       <p class="tagline">Career Dashboard</p>
-      <h1 id="welcomeUser">Welcome back </h1>
+      <h1>Welcome back, <%= userName || "User" %> 👋</h1>
       <p>Track your applications, interviews, offers and progress in one place.</p>
     </div>
 
@@ -26,25 +27,25 @@
   <section class="dashboard-stats">
     <div class="dash-card">
       <h3>Total Applications</h3>
-      <h2>24</h2>
+      <h2><%= totalApplications %></h2>
       <p>All job and internship applications</p>
     </div>
 
     <div class="dash-card">
       <h3>Applied</h3>
-      <h2>12</h2>
+      <h2><%= appliedCount %></h2>
       <p>Waiting for response</p>
     </div>
 
     <div class="dash-card">
       <h3>Interviews</h3>
-      <h2>7</h2>
+      <h2><%= interviewCount %></h2>
       <p>Scheduled / completed interviews</p>
     </div>
 
     <div class="dash-card">
       <h3>Selected</h3>
-      <h2>3</h2>
+      <h2><%= selectedCount %></h2>
       <p>Successful opportunities</p>
     </div>
   </section>
@@ -60,22 +61,23 @@
       <div class="chart-box">
         <div class="chart-row">
           <p>Applied</p>
-          <div class="chart-line"><span style="width: 80%;"></span></div>
+          <div class="chart-line">
+            <span style="width: <%= totalApplications ? (appliedCount / totalApplications) * 100 : 0 %>%;"></span>
+          </div>
         </div>
 
         <div class="chart-row">
           <p>Interview</p>
-          <div class="chart-line"><span style="width: 55%;"></span></div>
+          <div class="chart-line">
+            <span style="width: <%= totalApplications ? (interviewCount / totalApplications) * 100 : 0 %>%;"></span>
+          </div>
         </div>
 
         <div class="chart-row">
           <p>Selected</p>
-          <div class="chart-line"><span style="width: 35%;"></span></div>
-        </div>
-
-        <div class="chart-row">
-          <p>Rejected</p>
-          <div class="chart-line"><span style="width: 45%;"></span></div>
+          <div class="chart-line">
+            <span style="width: <%= totalApplications ? (selectedCount / totalApplications) * 100 : 0 %>%;"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -87,23 +89,25 @@
       </div>
 
       <div class="interview-list">
-        <div class="interview-item">
-          <h3>Accenture</h3>
-          <p>Frontend Developer Intern</p>
-          <span>12 June 2026</span>
-        </div>
+        <% const upcomingInterviews = recentApplications ? recentApplications.filter(app => app.status === "Interview") : []; %>
 
-        <div class="interview-item">
-          <h3>TCS</h3>
-          <p>Full Stack Trainee</p>
-          <span>18 June 2026</span>
-        </div>
-
-        <div class="interview-item">
-          <h3>Infosys</h3>
-          <p>System Engineer</p>
-          <span>25 June 2026</span>
-        </div>
+        <% if (upcomingInterviews.length > 0) { %>
+          <% upcomingInterviews.forEach((app) => { %>
+            <div class="interview-item">
+              <h3><%= app.companyName %></h3>
+              <p><%= app.jobRole %></p>
+              <span>
+                <%= app.interviewDate ? app.interviewDate.toISOString().split("T")[0] : "Interview Scheduled" %>
+              </span>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div class="interview-item">
+            <h3>No Upcoming Interviews</h3>
+            <p>Add interview applications to see reminders here.</p>
+            <span>CareerTrack Reminder</span>
+          </div>
+        <% } %>
       </div>
     </div>
 
@@ -128,37 +132,27 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>Accenture</td>
-            <td>Software Intern</td>
-            <td>Bangalore</td>
-            <td><span class="status interview">Interview</span></td>
-            <td>05 Jun 2026</td>
-          </tr>
-
-          <tr>
-            <td>TCS</td>
-            <td>Full Stack Trainee</td>
-            <td>Remote</td>
-            <td><span class="status applied">Applied</span></td>
-            <td>03 Jun 2026</td>
-          </tr>
-
-          <tr>
-            <td>Infosys</td>
-            <td>System Engineer</td>
-            <td>Pune</td>
-            <td><span class="status selected">Selected</span></td>
-            <td>28 May 2026</td>
-          </tr>
-
-          <tr>
-            <td>Wipro</td>
-            <td>Developer Intern</td>
-            <td>Hyderabad</td>
-            <td><span class="status rejected">Rejected</span></td>
-            <td>20 May 2026</td>
-          </tr>
+          <% if (recentApplications && recentApplications.length > 0) { %>
+            <% recentApplications.forEach((app) => { %>
+              <tr>
+                <td><%= app.companyName %></td>
+                <td><%= app.jobRole %></td>
+                <td><%= app.location %></td>
+                <td>
+                  <span class="status <%= app.status.toLowerCase() %>">
+                    <%= app.status %>
+                  </span>
+                </td>
+                <td>
+                  <%= app.appliedDate ? app.appliedDate.toISOString().split("T")[0] : "N/A" %>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="5">No recent applications found.</td>
+            </tr>
+          <% } %>
         </tbody>
       </table>
     </div>
@@ -185,7 +179,7 @@
 
 <%- include("./partials/footer") %>
 
-<script src="js/main.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/dashboard.js"></script>
 </body>
 </html>

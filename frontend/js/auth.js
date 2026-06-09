@@ -115,14 +115,11 @@ if (registerPassword) {
 
 if (registerForm) {
   registerForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
     const fullName = document.getElementById("fullName").value.trim();
     const email = document.getElementById("registerEmail").value.trim();
     const password = document.getElementById("registerPassword").value.trim();
     const confirm = document.getElementById("confirmPassword").value.trim();
     const terms = document.getElementById("termsCheck").checked;
-    const registerBtn = document.getElementById("registerBtn");
 
     document.getElementById("nameError").textContent = "";
     document.getElementById("emailError").textContent = "";
@@ -162,15 +159,8 @@ if (registerForm) {
       isValid = false;
     }
 
-    if (isValid) {
-      registerBtn.textContent = "Creating Account...";
-      registerBtn.disabled = true;
-
-      setTimeout(() => {
-        alert("Register UI tested successfully. Backend will be connected later.");
-        registerBtn.textContent = "Create Account";
-        registerBtn.disabled = false;
-      }, 1200);
+    if (!isValid) {
+      e.preventDefault();
     }
   });
 }

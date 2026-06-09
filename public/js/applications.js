@@ -118,19 +118,12 @@ if (applicationsTableBody) {
 
 if (applicationForm) {
   applicationForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
     const companyName = document.getElementById("companyName").value.trim();
     const jobRole = document.getElementById("jobRole").value.trim();
     const jobType = document.getElementById("jobType").value;
     const location = document.getElementById("location").value.trim();
-    const salary = document.getElementById("salary").value.trim();
     const status = document.getElementById("status").value;
     const appliedDate = document.getElementById("appliedDate").value;
-    const interviewDate = document.getElementById("interviewDate").value;
-    const source = document.getElementById("source").value;
-    const priority = document.getElementById("priority").value;
-    const notes = document.getElementById("notes").value.trim();
 
     document.getElementById("companyError").textContent = "";
     document.getElementById("roleError").textContent = "";
@@ -177,36 +170,9 @@ if (applicationForm) {
       isValid = false;
     }
 
-    if (!isValid) return;
-
-    const application = {
-      id: Date.now(),
-      companyName,
-      jobRole,
-      jobType,
-      location,
-      salary,
-      status,
-      appliedDate,
-      interviewDate,
-      source,
-      priority,
-      notes
-    };
-
-    const applications = getApplications();
-
-    applications.push(application);
-
-    saveApplications(applications);
-
-    const saveBtn = document.getElementById("saveApplicationBtn");
-    saveBtn.textContent = "Saving...";
-    saveBtn.disabled = true;
-
-    setTimeout(() => {
-      alert("Application saved successfully!");
-      window.location.href = "/applications";
-    }, 800);
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    }
   });
 }

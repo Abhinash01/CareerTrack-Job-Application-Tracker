@@ -5,6 +5,8 @@ const registerUser = async (req, res) => {
   try {
     const { fullName, email, password, confirmPassword } = req.body;
 
+    console.log(req.body);
+
     if (!fullName || !email || !password || !confirmPassword) {
       return res.status(400).render("register", {
         error: "All fields are required."
@@ -42,6 +44,57 @@ const registerUser = async (req, res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).render("login", {
+        error: "Email and password are required."
+      });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).render("login", {
+        error: "Invalid email or password."
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    req.session.userId = user._id;
+    req.session.userName = user.fullName;
+
+    if (!isMatch) {
+      return res.status(400).render("login", {
+        error: "Invalid email or password."
+      });
+    }
+
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error(error);
+    res.status(500).render("login", {
+      error: "Something went wrong. Please try again."
+    });
+  }
+};
+
+const logoutUser = (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error(error);
+      return res.redirect("/dashboard");
+    }
+
+    res.clearCookie("connect.sid");
+    res.redirect("/login");
+  });
+};
+
 module.exports = {
-  registerUser
+  registerUser,
+  loginUser,
+  logoutUser
 };

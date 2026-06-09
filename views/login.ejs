@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | CareerTrack</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
@@ -101,11 +102,11 @@
       <span>or login with email</span>
     </div>
 
-    <form id="loginForm">
+    <form id="loginForm" action="/auth/login" method="POST">
 
       <div class="input-group">
         <label>Email Address</label>
-        <input type="email" id="loginEmail" placeholder="Enter your email" required />
+        <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required />
         <small class="error-message" id="emailError"></small>
       </div>
 
@@ -114,7 +115,7 @@
 
 
         <div class="password-box">
-          <input type="password" id="password" placeholder="Enter your password" required />
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
 
           <button type="button" id="togglePassword" class="show-btn">
             Show
@@ -152,8 +153,8 @@
 
 <%- include("./partials/footer") %>
 
-    <script src="js/main.js"></script>
-    <script src="js/auth.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/auth.js"></script>
 
 </body>
 </html>
