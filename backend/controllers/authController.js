@@ -5,8 +5,6 @@ const registerUser = async (req, res) => {
   try {
     const { fullName, email, password, confirmPassword } = req.body;
 
-    console.log(req.body);
-
     if (!fullName || !email || !password || !confirmPassword) {
       return res.status(400).render("register", {
         error: "All fields are required."
@@ -63,13 +61,20 @@ const loginUser = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    req.session.userId = user._id;
-    req.session.userName = user.fullName;
 
     if (!isMatch) {
       return res.status(400).render("login", {
         error: "Invalid email or password."
       });
+    }
+
+    req.session.userId = user._id;
+    req.session.userName = user.fullName;
+
+    if (req.body.rememberMe) {
+      req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
+    } else {
+      req.session.cookie.expires = false;
     }
 
     res.redirect("/dashboard");

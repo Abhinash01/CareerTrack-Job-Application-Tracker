@@ -1630,3 +1630,235 @@ textarea {
   color: var(--muted-text);
   line-height: 1.8;
 }
+
+/* =========================
+   CAREERTRACK DARK MODE
+========================= */
+
+body.dark-mode {
+  background: #000;
+  color: #fff;
+}
+
+/* Navbar */
+
+body.dark-mode .header,
+body.dark-mode .navbar {
+  background: #000 !important;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+body.dark-mode .logo,
+body.dark-mode .logo span,
+body.dark-mode .nav-links a,
+body.dark-mode .menu-btn {
+  color: #fff !important;
+}
+
+body.dark-mode .nav-links a:hover {
+  color: #8b5cf6 !important;
+}
+
+/* Footer */
+
+body.dark-mode .footer {
+  background: #000 !important;
+  border-top: 1px solid #1f1f1f;
+}
+
+body.dark-mode .footer * {
+  color: #fff !important;
+}
+
+/* Main Cards */
+
+body.dark-mode .auth-card,
+body.dark-mode .contact-card,
+body.dark-mode .legal-card,
+body.dark-mode .profile-card,
+body.dark-mode .dashboard-panel,
+body.dark-mode .feature-card,
+body.dark-mode .application-form-card,
+body.dark-mode .dash-card,
+body.dark-mode .action-card,
+body.dark-mode .faq-item,
+body.dark-mode .step,
+body.dark-mode .tech-card,
+body.dark-mode .about-content-card,
+body.dark-mode .hero-card,
+body.dark-mode .stat-card,
+body.dark-mode .contact-form-card {
+  background: #0d0d0d !important;
+  border: 1px solid #222 !important;
+  color: #fff !important;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+
+body.dark-mode .feature-card:hover,
+body.dark-mode .dash-card:hover,
+body.dark-mode .hero-card:hover,
+body.dark-mode .action-card:hover,
+body.dark-mode .stat-card:hover {
+  background: #151515 !important;
+  border-color: #8b5cf6 !important;
+  transform: translateY(-4px);
+}
+
+/* Forms */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #111 !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #888;
+}
+
+/* Buttons */
+
+body.dark-mode .login-btn,
+body.dark-mode .register-btn,
+body.dark-mode .google-btn,
+body.dark-mode .linkedin-btn,
+body.dark-mode .show-btn {
+  background: #111 !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+}
+
+body.dark-mode .login-btn:hover,
+body.dark-mode .register-btn:hover,
+body.dark-mode .google-btn:hover,
+body.dark-mode .linkedin-btn:hover {
+  background: #1b1b1b !important;
+  border-color: #8b5cf6 !important;
+}
+
+/* Tables */
+
+body.dark-mode table {
+  background: #0d0d0d !important;
+}
+
+body.dark-mode th {
+  background: #111 !important;
+  color: #fff !important;
+}
+
+body.dark-mode td {
+  background: #0d0d0d !important;
+  color: #fff !important;
+}
+
+/* Dashboard Preview */
+
+body.dark-mode .dashboard-preview {
+  background: #0d0d0d !important;
+  border: 1px solid #222 !important;
+}
+
+body.dark-mode .dashboard-preview .stat-card,
+body.dark-mode .dashboard-preview .dash-card {
+  background: #111 !important;
+}
+
+/* Stats Grid */
+
+body.dark-mode .stats-grid {
+  background: transparent !important;
+}
+
+/* Text */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode label,
+body.dark-mode strong,
+body.dark-mode li {
+  color: #fff !important;
+}
+
+/* Clean Login/Register Auth Dark Mode */
+
+body.dark-mode .auth-info {
+  background: transparent !important;
+  color: #fff !important;
+}
+
+body.dark-mode .info-badge {
+  background: rgba(124, 58, 237, 0.15) !important;
+  color: #fff !important;
+  border: 1px solid rgba(124, 58, 237, 0.35) !important;
+}
+
+body.dark-mode .auth-stats {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .auth-stats > div {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid #222 !important;
+  border-radius: 14px !important;
+  color: #fff !important;
+}
+
+body.dark-mode .info-points {
+  background: transparent !important;
+  border: none !important;
+}
+
+body.dark-mode .auth-feature-box {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid #222 !important;
+  border-radius: 18px !important;
+  color: #fff !important;
+}
+
+body.dark-mode .mini-feature {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+body.dark-mode .mini-feature:hover {
+  background: rgba(124, 58, 237, 0.12) !important;
+  border-radius: 12px !important;
+}
+
+/* Highlight Box Dark Mode */
+
+body.dark-mode .highlight-box {
+  background: #0a0a0a !important;
+  border: 1px solid #222 !important;
+}
+
+body.dark-mode .highlight-box ul,
+body.dark-mode .highlight-box li {
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* Theme Toggle */
+
+.theme-toggle {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+}

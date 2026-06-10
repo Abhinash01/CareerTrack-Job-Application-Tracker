@@ -82,7 +82,7 @@
                 </td>
                 <td>
                   <div class="action-buttons">
-                    <button class="small-btn edit-btn">Edit</button>
+                    <a href="/application/edit/<%= app._id %>" class="small-btn edit-btn">Edit</a>
                     <form action="/application/delete/<%= app._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this application?');">
                       <button type="submit" class="small-btn delete-btn">Delete</button>
                     </form>
@@ -107,6 +107,6 @@
 
 <%- include("./partials/footer") %>
 
-<script src="/js/main.js"></script>
+
 </body>
 </html>

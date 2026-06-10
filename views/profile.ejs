@@ -25,9 +25,11 @@
   <section class="profile-grid">
 
     <div class="profile-card">
-      <div class="profile-avatar">AG</div>
-      <h2 id="profileName">Abhinash Gupta</h2>
-      <p id="profileEmail">abhinash@example.com</p>
+      <div class="profile-avatar">
+      <%= user.fullName ? user.fullName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "U" %>
+      </div>
+      <h2 id="profileName"><%= user.fullName %></h2>
+      <p id="profileEmail"><%= user.email %></p>
 
       <div class="profile-tags">
         <span>MCA Student</span>
@@ -49,12 +51,12 @@
         <div class="info-list">
           <div>
             <strong>Full Name</strong>
-            <p id="infoName">Abhinash Gupta</p>
+            <p id="infoName"><%= user.fullName %></p>
           </div>
 
           <div>
             <strong>Email</strong>
-            <p id="infoEmail">abhinash@example.com</p>
+            <p id="infoEmail"><%= user.email %></p>
           </div>
 
           <div>
@@ -107,7 +109,7 @@
 
 <%- include("./partials/footer") %>
 
-<script src="/js/main.js"></script>
+
 <script src="/js/profile.js"></script>
 </body>
 </html>

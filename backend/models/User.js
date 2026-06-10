@@ -19,11 +19,31 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true
+    },
+
+    phone: {
+      type: String,
+      default: ""
+    },    
+
+    location: {
+      type: String,
+      default: ""
+    },
+
+    careerGoal: {
+      type: String,
+      default: "I am focused on building my career and tracking job applications with CareerTrack."
+    },
+
+    skills: {
+      type: [String],
+      default: []
     }
   },
   {
     timestamps: true
   }
-);
+);  
 
 module.exports = mongoose.model("User", userSchema);

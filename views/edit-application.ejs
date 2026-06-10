@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Application | CareerTrack</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+
+<%- include("./partials/app-navbar") %>
+
+<main class="form-page">
+
+  <section class="form-hero">
+    <div>
+      <p class="tagline">Update Record</p>
+      <h1>Edit Job Application</h1>
+      <p>Update company details, role, status, interview date and notes.</p>
+    </div>
+
+    <a href="/applications" class="secondary-btn">Back to Applications</a>
+  </section>
+
+  <section class="application-form-card">
+
+    <form action="/application/edit/<%= application._id %>" method="POST">
+
+      <div class="form-grid">
+
+        <div class="input-group">
+          <label>Company Name *</label>
+          <input type="text" name="companyName" value="<%= application.companyName %>" required />
+        </div>
+
+        <div class="input-group">
+          <label>Job Role *</label>
+          <input type="text" name="jobRole" value="<%= application.jobRole %>" required />
+        </div>
+
+        <div class="input-group">
+          <label>Job Type *</label>
+          <select name="jobType" required>
+            <option value="Internship" <%= application.jobType === "Internship" ? "selected" : "" %>>Internship</option>
+            <option value="Full Time" <%= application.jobType === "Full Time" ? "selected" : "" %>>Full Time</option>
+            <option value="Part Time" <%= application.jobType === "Part Time" ? "selected" : "" %>>Part Time</option>
+            <option value="Remote" <%= application.jobType === "Remote" ? "selected" : "" %>>Remote</option>
+            <option value="Contract" <%= application.jobType === "Contract" ? "selected" : "" %>>Contract</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Location *</label>
+          <input type="text" name="location" value="<%= application.location %>" required />
+        </div>
+
+        <div class="input-group">
+          <label>Salary / Stipend</label>
+          <input type="text" name="salary" value="<%= application.salary || '' %>" />
+        </div>
+
+        <div class="input-group">
+          <label>Application Status *</label>
+          <select name="status" required>
+            <option value="Applied" <%= application.status === "Applied" ? "selected" : "" %>>Applied</option>
+            <option value="Shortlisted" <%= application.status === "Shortlisted" ? "selected" : "" %>>Shortlisted</option>
+            <option value="Interview" <%= application.status === "Interview" ? "selected" : "" %>>Interview</option>
+            <option value="Selected" <%= application.status === "Selected" ? "selected" : "" %>>Selected</option>
+            <option value="Rejected" <%= application.status === "Rejected" ? "selected" : "" %>>Rejected</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Applied Date *</label>
+          <input
+            type="date"
+            name="appliedDate"
+            value="<%= application.appliedDate ? application.appliedDate.toISOString().split('T')[0] : '' %>"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Interview Date</label>
+          <input
+            type="date"
+            name="interviewDate"
+            value="<%= application.interviewDate ? application.interviewDate.toISOString().split('T')[0] : '' %>"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Job Source</label>
+          <select name="source">
+            <option value="">Select Source</option>
+            <option value="LinkedIn" <%= application.source === "LinkedIn" ? "selected" : "" %>>LinkedIn</option>
+            <option value="Naukri" <%= application.source === "Naukri" ? "selected" : "" %>>Naukri</option>
+            <option value="Indeed" <%= application.source === "Indeed" ? "selected" : "" %>>Indeed</option>
+            <option value="Company Website" <%= application.source === "Company Website" ? "selected" : "" %>>Company Website</option>
+            <option value="Referral" <%= application.source === "Referral" ? "selected" : "" %>>Referral</option>
+            <option value="Campus Placement" <%= application.source === "Campus Placement" ? "selected" : "" %>>Campus Placement</option>
+            <option value="Other" <%= application.source === "Other" ? "selected" : "" %>>Other</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Priority</label>
+          <select name="priority">
+            <option value="Medium" <%= application.priority === "Medium" ? "selected" : "" %>>Medium</option>
+            <option value="High" <%= application.priority === "High" ? "selected" : "" %>>High</option>
+            <option value="Low" <%= application.priority === "Low" ? "selected" : "" %>>Low</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="input-group">
+        <label>Notes</label>
+        <textarea name="notes" placeholder="Add interview round details, HR contact, follow-up reminder, etc."><%= application.notes || "" %></textarea>
+      </div>
+
+      <div class="form-actions">
+        <a href="/applications" class="secondary-btn">Cancel</a>
+        <button type="submit" class="auth-btn">Update Application</button>
+      </div>
+
+    </form>
+
+  </section>
+
+</main>
+
+<%- include("./partials/footer") %>
+
+
+</body>
+</html>

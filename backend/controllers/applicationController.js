@@ -23,7 +23,7 @@ const addApplication = async (req, res) => {
     }
 
     await Application.create({
-      user: req.userId || "000000000000000000000000",
+      user: req.session.userId,
       companyName,
       jobRole,
       jobType,
@@ -48,10 +48,9 @@ const addApplication = async (req, res) => {
 
 const getApplications = async (req, res) => {
   try {
-    const applications = await Application.find().sort({ createdAt: -1 });
-
-    console.log("Applications Found:", applications.length);
-    console.log(applications);
+    const applications = await Application.find({
+      user: req.session.userId
+    }).sort({ createdAt: -1 });
 
     res.render("applications", {
       applications
@@ -66,9 +65,10 @@ const getApplications = async (req, res) => {
 
 const deleteApplication = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    await Application.findByIdAndDelete(id);
+    await Application.findOneAndDelete({
+      _id: req.params.id,
+      user: req.session.userId
+    });
 
     res.redirect("/applications");
   } catch (error) {
@@ -77,24 +77,30 @@ const deleteApplication = async (req, res) => {
   }
 };
 
-
 const getDashboard = async (req, res) => {
   try {
-    const totalApplications = await Application.countDocuments();
+    const totalApplications = await Application.countDocuments({
+      user: req.session.userId
+    });
 
     const appliedCount = await Application.countDocuments({
+      user: req.session.userId,
       status: "Applied"
     });
 
     const interviewCount = await Application.countDocuments({
+      user: req.session.userId,
       status: "Interview"
     });
 
     const selectedCount = await Application.countDocuments({
+      user: req.session.userId,
       status: "Selected"
     });
 
-    const recentApplications = await Application.find()
+    const recentApplications = await Application.find({
+      user: req.session.userId
+    })
       .sort({ createdAt: -1 })
       .limit(5);
 
@@ -106,7 +112,6 @@ const getDashboard = async (req, res) => {
       selectedCount,
       recentApplications
     });
-
   } catch (error) {
     console.error(error);
     res.render("dashboard", {
@@ -120,10 +125,74 @@ const getDashboard = async (req, res) => {
   }
 };
 
+const getEditApplication = async (req, res) => {
+  try {
+    const application = await Application.findOne({
+      _id: req.params.id,
+      user: req.session.userId
+    });
+
+    if (!application) {
+      return res.redirect("/applications");
+    }
+
+    res.render("edit-application", {
+      application
+    });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/applications");
+  }
+};
+
+const updateApplication = async (req, res) => {
+  try {
+    const {
+      companyName,
+      jobRole,
+      jobType,
+      location,
+      salary,
+      status,
+      appliedDate,
+      interviewDate,
+      source,
+      priority,
+      notes
+    } = req.body;
+
+    await Application.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        user: req.session.userId
+      },
+      {
+        companyName,
+        jobRole,
+        jobType,
+        location,
+        salary,
+        status,
+        appliedDate,
+        interviewDate: interviewDate || null,
+        source,
+        priority,
+        notes
+      }
+    );
+
+    res.redirect("/applications");
+  } catch (error) {
+    console.error(error);
+    res.redirect("/applications");
+  }
+};
 
 module.exports = {
   addApplication,
   getApplications,
   deleteApplication,
-  getDashboard
+  getDashboard,
+  getEditApplication,
+  updateApplication
 };
