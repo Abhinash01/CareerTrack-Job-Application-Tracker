@@ -539,3 +539,95 @@ body.dark-mode .info-list div {
   }
 }
 
+/* ===== DASHBOARD MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px 14px;
+  }
+
+  .dashboard-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px 18px;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .dashboard-hero p {
+    font-size: 14px;
+  }
+
+  .dashboard-hero .primary-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dash-card {
+    padding: 20px;
+  }
+
+  .dash-card h2 {
+    font-size: 30px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .dashboard-panel {
+    padding: 20px 16px;
+    overflow-x: hidden;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .chart-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  #statusChart {
+    max-height: 280px;
+  }
+
+  .interview-item {
+    padding: 14px;
+  }
+
+  .recent-section {
+    overflow-x: auto;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .application-table {
+    min-width: 650px;
+  }
+
+  .quick-actions {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .action-card {
+    padding: 20px;
+  }
+}

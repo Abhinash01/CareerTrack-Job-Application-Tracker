@@ -13,7 +13,11 @@
   <div class="startup-logo">CT</div>
   </div>
 
-<%- include("partials/public-navbar") %>
+<% if (userLoggedIn) { %>
+  <%- include("./partials/app-navbar") %>
+<% } else { %>
+  <%- include("./partials/public-navbar") %>
+<% } %>
 
   <section class="hero">
     <div class="hero-content">

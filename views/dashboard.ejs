@@ -58,28 +58,15 @@
         <span>This Month</span>
       </div>
 
-      <div class="chart-box">
-        <div class="chart-row">
-          <p>Applied</p>
-          <div class="chart-line">
-            <span style="width: <%= totalApplications ? (appliedCount / totalApplications) * 100 : 0 %>%;"></span>
-          </div>
-        </div>
-
-        <div class="chart-row">
-          <p>Interview</p>
-          <div class="chart-line">
-            <span style="width: <%= totalApplications ? (interviewCount / totalApplications) * 100 : 0 %>%;"></span>
-          </div>
-        </div>
-
-        <div class="chart-row">
-          <p>Selected</p>
-          <div class="chart-line">
-            <span style="width: <%= totalApplications ? (selectedCount / totalApplications) * 100 : 0 %>%;"></span>
-          </div>
-        </div>
-      </div>
+      <div class="chart-container">
+  <canvas
+    id="statusChart"
+    data-applied="<%= appliedCount %>"
+    data-interview="<%= interviewCount %>"
+    data-selected="<%= selectedCount %>"
+    data-total="<%= totalApplications %>"
+  ></canvas>
+</div>
     </div>
 
     <div class="dashboard-panel">
@@ -181,6 +168,7 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/js/dashboard.js"></script>
 </body>
 </html>

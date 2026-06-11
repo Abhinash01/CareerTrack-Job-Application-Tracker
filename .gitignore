@@ -1,7 +1,6 @@
-node_modules/
+node_modules
 .env
-.env.local
-
-logs/
+.DS_Store
 *.log
-uploads/
+frontend-backup
+frontend

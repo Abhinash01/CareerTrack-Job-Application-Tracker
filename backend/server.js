@@ -26,7 +26,7 @@ connectDB();
 // Session Middleware
 app.use(
   session({
-    secret: "careertracksecret",
+    secret: process.env.SESSION_SECRET || "careertracksecret",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -34,6 +34,12 @@ app.use(
     }
   })
 );
+
+app.use((req, res, next) => {
+  res.locals.userLoggedIn = !!req.session.userId;
+  res.locals.userName = req.session.userName || null;
+  next();
+});
 
 // Body Parser Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -101,6 +107,3 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-app.get("/forgot-password", (req, res) => {
-  res.render("forgot-password");
-});

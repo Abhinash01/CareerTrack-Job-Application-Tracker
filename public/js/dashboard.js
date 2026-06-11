@@ -1,29 +1,40 @@
-const dashboardCards = document.querySelectorAll(".dash-card");
+document.addEventListener("DOMContentLoaded", () => {
+  const statusChart = document.getElementById("statusChart");
 
-dashboardCards.forEach((card, index) => {
-  card.style.opacity = "0";
-  card.style.transform = "translateY(20px)";
+  if (!statusChart) return;
 
-  setTimeout(() => {
-    card.style.transition = "0.5s ease";
-    card.style.opacity = "1";
-    card.style.transform = "translateY(0)";
-  }, index * 150);
+  const applied = Number(statusChart.dataset.applied);
+  const interview = Number(statusChart.dataset.interview);
+  const selected = Number(statusChart.dataset.selected);
+  const total = Number(statusChart.dataset.total);
+
+  new Chart(statusChart, {
+    type: "doughnut",
+    data: {
+      labels: ["Applied", "Interview", "Selected"],
+      datasets: [
+        {
+          data: [applied, interview, selected],
+          backgroundColor: [
+            "#3b82f6",
+            "#f59e0b",
+            "#10b981"
+          ],
+          borderWidth: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: `Total Applications: ${total}`
+        },
+        legend: {
+          position: "bottom"
+        }
+      }
+    }
+  });
 });
-const welcomeUser = document.getElementById("welcomeUser");
-
-const userName = localStorage.getItem("userName") || "User";
-
-const hour = new Date().getHours();
-
-let greeting = "Good Evening";
-
-if (hour < 12) {
-  greeting = "Good Morning";
-} else if (hour < 18) {
-  greeting = "Good Afternoon";
-}
-
-if (welcomeUser) {
-  welcomeUser.textContent = `${greeting}, ${userName} `;
-}

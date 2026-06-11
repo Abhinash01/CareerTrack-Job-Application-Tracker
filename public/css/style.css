@@ -240,7 +240,7 @@ textarea {
 .theme-toggle:hover {
   transform: rotate(20deg);
 }
-  
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -2077,3 +2077,13 @@ body.dark-mode .menu-btn {
   background: #111 !important;
   border: 1px solid #333 !important;
 } 
+
+.chart-container {
+  max-width: 450px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+body.dark-mode .chart-container {
+  background: transparent;
+}
