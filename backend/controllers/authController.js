@@ -86,6 +86,53 @@ const loginUser = async (req, res) => {
   }
 };
 
+
+const forgotPasswordPage = (req, res) => {
+  res.render("forgot-password");
+};
+
+const forgotPassword = async (req, res) => {
+  try {
+    const { email, password, confirmPassword } = req.body;
+
+    if (!email || !password || !confirmPassword) {
+      return res.render("forgot-password", {
+        error: "All fields are required."
+      });
+    }
+
+    if (password !== confirmPassword) {
+      return res.render("forgot-password", {
+        error: "Passwords do not match."
+      });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.render("forgot-password", {
+        error: "No account found with this email."
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    user.password = hashedPassword;
+
+    await user.save();
+
+    res.redirect("/login");
+
+  } catch (error) {
+    console.error(error);
+
+    res.render("forgot-password", {
+      error: "Something went wrong."
+    });
+  }
+};
+
+
 const logoutUser = (req, res) => {
   req.session.destroy((error) => {
     if (error) {
@@ -101,5 +148,7 @@ const logoutUser = (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  forgotPasswordPage,
+  forgotPassword
 };

@@ -48,17 +48,39 @@ const addApplication = async (req, res) => {
 
 const getApplications = async (req, res) => {
   try {
-    const applications = await Application.find({
+    const { search, status } = req.query;
+
+    let filter = {
       user: req.session.userId
-    }).sort({ createdAt: -1 });
+    };
+
+    if (search) {
+      filter.$or = [
+        { companyName: { $regex: search, $options: "i" } },
+        { jobRole: { $regex: search, $options: "i" } },
+        { location: { $regex: search, $options: "i" } }
+      ];
+    }
+
+    if (status && status !== "All") {
+      filter.status = status;
+    }
+
+    const applications = await Application.find(filter).sort({
+      createdAt: -1
+    });
 
     res.render("applications", {
-      applications
+      applications,
+      search: search || "",
+      status: status || "All"
     });
   } catch (error) {
     console.error(error);
     res.status(500).render("applications", {
-      applications: []
+      applications: [],
+      search: "",
+      status: "All"
     });
   }
 };

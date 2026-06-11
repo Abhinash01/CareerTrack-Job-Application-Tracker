@@ -85,22 +85,7 @@
       <p>Login to continue your career journey.</p>
     </div>
 
-<div class="social-login">
-
-    <button type="button" class="google-btn">
-        <i class="fa-brands fa-google"></i>
-        Continue with Google
-    </button>
-
-    <button type="button" class="linkedin-btn">
-        <i class="fa-brands fa-linkedin"></i>
-        Continue with LinkedIn
-    </button>
-
-</div>
-    <div class="divider">
-      <span>or login with email</span>
-    </div>
+   
 
     <form id="loginForm" action="/auth/login" method="POST">
 
@@ -132,7 +117,7 @@
         <input type="checkbox" name="rememberMe" />
             Remember Me
         </label>
-        <a href="#">Forgot Password?</a>
+        <a href="/auth/forgot-password">Forgot Password?</a>
       </div>
 
       <button type="submit" class="auth-btn" id="loginBtn">

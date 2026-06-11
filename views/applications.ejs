@@ -33,22 +33,34 @@
       </span>
     </div>
 
-    <div class="applications-tools">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search by company or role..."
-      />
+    <form class="applications-tools" method="GET" action="/application">
 
-      <select id="statusFilter">
-        <option value="All">All Status</option>
-        <option value="Applied">Applied</option>
-        <option value="Shortlisted">Shortlisted</option>
-        <option value="Interview">Interview</option>
-        <option value="Selected">Selected</option>
-        <option value="Rejected">Rejected</option>
-      </select>
-    </div>
+  <input
+    type="text"
+    name="search"
+    id="searchInput"
+    placeholder="Search by company, role or location..."
+    value="<%= search || '' %>"
+  />
+
+  <select id="statusFilter" name="status">
+    <option value="All" <%= status === "All" ? "selected" : "" %>>All Status</option>
+    <option value="Applied" <%= status === "Applied" ? "selected" : "" %>>Applied</option>
+    <option value="Shortlisted" <%= status === "Shortlisted" ? "selected" : "" %>>Shortlisted</option>
+    <option value="Interview" <%= status === "Interview" ? "selected" : "" %>>Interview</option>
+    <option value="Selected" <%= status === "Selected" ? "selected" : "" %>>Selected</option>
+    <option value="Rejected" <%= status === "Rejected" ? "selected" : "" %>>Rejected</option>
+  </select>
+
+  <button type="submit" class="primary-btn">
+    Search
+  </button>
+
+  <a href="/applications" class="secondary-btn">
+    Reset
+  </a>
+
+</form>
 
     <% if (applications && applications.length > 0) { %>
       <div class="table-wrapper">

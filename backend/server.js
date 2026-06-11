@@ -100,3 +100,7 @@ app.post("/submit-test", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.get("/forgot-password", (req, res) => {
+  res.render("forgot-password");
+});

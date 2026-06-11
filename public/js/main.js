@@ -31,3 +31,39 @@ if (localStorage.getItem("theme") === "dark") {
   if (themeToggle) themeToggle.textContent = "☀️";
 }
 
+// Page Loader
+window.addEventListener("load", () => {
+  const loader = document.getElementById("startupLoader");
+
+  if (!loader) return;
+
+  setTimeout(() => {
+    loader.style.display = "none";
+    sessionStorage.setItem("careertrack_loader", "shown");
+  }, 250);
+});
+
+// Smooth page transitions
+
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("a");
+
+  if (!link) return;
+
+  const href = link.getAttribute("href");
+
+  if (
+    href &&
+    !href.startsWith("#") &&
+    !href.startsWith("http") &&
+    !link.hasAttribute("target")
+  ) {
+    e.preventDefault();
+
+    document.body.classList.add("page-exit");
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 180);
+  }
+});
