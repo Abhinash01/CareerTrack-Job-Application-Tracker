@@ -48,56 +48,116 @@
       <h2><%= selectedCount %></h2>
       <p>Successful opportunities</p>
     </div>
+
+    <div class="dash-card success-card">
+      <h3>Success Rate</h3>
+      <h2>
+        <%= totalApplications ? Math.round((selectedCount / totalApplications) * 100) : 0 %>%
+      </h2>
+      <p>Based on selected applications</p>
+    </div>
   </section>
 
-  <section class="dashboard-grid">
+<section class="dashboard-grid premium-dashboard-grid">
 
-    <div class="dashboard-panel">
-      <div class="panel-header">
+  <div class="dashboard-panel analytics-panel">
+    <div class="panel-header">
+      <div>
         <h2>Application Analytics</h2>
-        <span>This Month</span>
+        <p>Visual overview of your application progress</p>
       </div>
-
-      <div class="chart-container">
-  <canvas
-    id="statusChart"
-    data-applied="<%= appliedCount %>"
-    data-interview="<%= interviewCount %>"
-    data-selected="<%= selectedCount %>"
-    data-total="<%= totalApplications %>"
-  ></canvas>
-</div>
+      <span>This Month</span>
     </div>
 
-    <div class="dashboard-panel">
-      <div class="panel-header">
+    <div class="chart-container">
+      <canvas
+        id="statusChart"
+        data-applied="<%= appliedCount %>"
+        data-interview="<%= interviewCount %>"
+        data-selected="<%= selectedCount %>"
+        data-total="<%= totalApplications %>"
+      ></canvas>
+    </div>
+  </div>
+
+  <div class="dashboard-panel">
+    <div class="panel-header">
+      <div>
         <h2>Upcoming Interviews</h2>
-        <span>Reminder</span>
+        <p>Your interview reminders</p>
       </div>
-
-      <div class="interview-list">
-        <% const upcomingInterviews = recentApplications ? recentApplications.filter(app => app.status === "Interview") : []; %>
-
-        <% if (upcomingInterviews.length > 0) { %>
-          <% upcomingInterviews.forEach((app) => { %>
-            <div class="interview-item">
-              <h3><%= app.companyName %></h3>
-              <p><%= app.jobRole %></p>
-              <span>
-                <%= app.interviewDate ? app.interviewDate.toISOString().split("T")[0] : "Interview Scheduled" %>
-              </span>
-            </div>
-          <% }) %>
-        <% } else { %>
-          <div class="interview-item">
-            <h3>No Upcoming Interviews</h3>
-            <p>Add interview applications to see reminders here.</p>
-            <span>CareerTrack Reminder</span>
-          </div>
-        <% } %>
-      </div>
+      <span>Reminder</span>
     </div>
 
+    <div class="interview-list">
+      <% const upcomingInterviews = recentApplications ? recentApplications.filter(app => app.status === "Interview") : []; %>
+
+      <% if (upcomingInterviews.length > 0) { %>
+        <% upcomingInterviews.forEach((app) => { %>
+          <div class="interview-item">
+            <h3><%= app.companyName %></h3>
+            <p><%= app.jobRole %></p>
+            <span>
+              <%= app.interviewDate ? app.interviewDate.toISOString().split("T")[0] : "Interview Scheduled" %>
+            </span>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="interview-item">
+          <h3>No Upcoming Interviews</h3>
+          <p>Add interview applications to see reminders here.</p>
+          <span>CareerTrack Reminder</span>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="dashboard-panel quote-panel">
+    <div class="panel-header">
+      <div>
+        <h2>💡 Career Motivation</h2>
+        <p>External API powered quote</p>
+      </div>
+      <span>API</span>
+    </div>
+
+    <div class="quote-box">
+      <p id="quoteText">Loading quote...</p>
+      <small id="quoteAuthor"></small>
+    </div>
+  </div>
+
+</section>
+  <section class="dashboard-panel">
+  <div class="panel-header">
+    <h2>Recent Activity</h2>
+  </div>
+
+  <div class="activity-list">
+
+    <% if(recentApplications && recentApplications.length > 0){ %>
+
+      <% recentApplications.slice(0,4).forEach(app => { %>
+
+        <div class="activity-item">
+
+          <span class="activity-dot"></span>
+
+          <div>
+            <h4>Applied to <%= app.companyName %></h4>
+
+            <p>
+              <%= app.jobRole %> • <%= app.status %>
+            </p>
+          </div>
+
+        </div>
+
+      <% }) %>
+
+    <% } %>
+
+  </div>
   </section>
 
   <section class="dashboard-panel recent-section">

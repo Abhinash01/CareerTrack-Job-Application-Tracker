@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard | CareerTrack</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+
+<button class="admin-mobile-toggle" id="adminMenuBtn">
+  ☰
+</button>
+
+<main class="admin-layout">
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <h2>🛡 Admin Panel</h2>
+
+    <a href="/admin/dashboard">📊 Dashboard</a>
+    <a href="#analytics-section">📈 Analytics</a>
+    <a href="#recent-section">🕒 Recent</a>
+    <a href="#users-section">👥 Users</a>
+    <a href="#applications-section">📄 Applications</a>
+    <a href="/dashboard">🌐 Back to Site</a>
+    <a href="/admin/logout" class="admin-logout-link">🚪 Logout</a>
+  </aside>
+
+  <section class="admin-main">
+
+    <section class="dashboard-hero admin-hero">
+      <div>
+        <p class="tagline">Admin Panel</p>
+        <h1>CareerTrack Admin Dashboard</h1>
+        <p>Manage users, applications and platform data from one place.</p>
+      </div>
+    </section>
+        <a href="/admin/export/full-report" class="auth-btn">
+  📥 Export Full Report
+        </a>
+    <section class="dashboard-stats admin-stats">
+      <div class="dash-card">
+        <h3>Total Users</h3>
+        <h2><%= totalUsers || 0 %></h2>
+        <p>Registered CareerTrack users</p>
+      </div>
+
+      <div class="dash-card">
+        <h3>Total Applications</h3>
+        <h2><%= totalApplications || 0 %></h2>
+        <p>All user applications</p>
+      </div>
+
+      <div class="dash-card">
+        <h3>Interviews</h3>
+        <h2><%= interviewApplications || 0 %></h2>
+        <p>Total interview applications</p>
+      </div>
+
+      <div class="dash-card success-card">
+        <h3>Selected</h3>
+        <h2><%= selectedApplications || 0 %></h2>
+        <p>Total selected applications</p>
+      </div>
+    </section>
+    <div class="dash-card">
+  <h3>Pending</h3>
+  <h2><%= pendingApplications %></h2>
+  <p>Waiting for response</p>
+</div>
+
+<div class="dash-card">
+  <h3>Rejected</h3>
+  <h2><%= rejectedApplications %></h2>
+  <p>Rejected applications</p>
+</div>
+
+    <section id="analytics-section" class="admin-analytics-grid">
+
+      <div class="dashboard-panel admin-chart-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Platform Analytics</h2>
+            <p>User activity and application status overview</p>
+          </div>
+          <span>Admin Insights</span>
+        </div>
+
+        <div class="admin-chart-wrap">
+          <canvas
+            id="adminAnalyticsChart"
+            data-users="<%= totalUsers || 0 %>"
+            data-applications="<%= totalApplications || 0 %>"
+            data-interviews="<%= interviewApplications || 0 %>"
+            data-selected="<%= selectedApplications || 0 %>"
+          ></canvas>
+        </div>
+      </div>
+
+      <div class="dashboard-panel admin-rate-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Performance Rates</h2>
+            <p>Interview and selection conversion</p>
+          </div>
+        </div>
+
+        <div class="rate-list">
+
+          <div class="rate-item">
+            <div>
+              <h3>Success Rate</h3>
+              <p><%= selectedApplications || 0 %> selected out of <%= totalApplications || 0 %></p>
+            </div>
+            <strong><%= successRate || 0 %>%</strong>
+          </div>
+
+          <div class="rate-bar">
+            <span style="width: <%= successRate || 0 %>%;"></span>
+          </div>
+
+          <div class="rate-item">
+            <div>
+              <h3>Interview Rate</h3>
+              <p><%= interviewApplications || 0 %> interviews out of <%= totalApplications || 0 %></p>
+            </div>
+            <strong><%= interviewRate || 0 %>%</strong>
+          </div>
+
+          <div class="rate-bar">
+            <span style="width: <%= interviewRate || 0 %>%;"></span>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section id="recent-section" class="admin-recent-grid">
+
+      <div class="dashboard-panel">
+        <div class="panel-header">
+          <h2>Recent Registrations</h2>
+          <span>Latest Users</span>
+        </div>
+
+        <div class="admin-mini-list">
+          <% if (recentUsers && recentUsers.length > 0) { %>
+            <% recentUsers.forEach(user => { %>
+              <div class="admin-mini-item">
+                <div>
+                  <h4><%= user.fullName %></h4>
+                  <p><%= user.email %></p>
+                </div>
+                <span>
+                  <%= user.createdAt ? user.createdAt.toISOString().split("T")[0] : "N/A" %>
+                </span>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>No recent users found.</p>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="dashboard-panel">
+        <div class="panel-header">
+          <h2>Recent Applications</h2>
+          <span>Latest Activity</span>
+        </div>
+
+        <div class="admin-mini-list">
+          <% if (recentApplications && recentApplications.length > 0) { %>
+            <% recentApplications.forEach(app => { %>
+              <div class="admin-mini-item">
+                <div>
+                  <h4><%= app.companyName %></h4>
+                  <p>
+                    <%= app.jobRole %>
+                    •
+                    <%= app.user ? app.user.fullName : "Deleted User" %>
+                  </p>
+                </div>
+
+                <span class="status <%= app.status ? app.status.toLowerCase() : 'applied' %>">
+                  <%= app.status || "Applied" %>
+                </span>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>No recent applications found.</p>
+          <% } %>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="users-section" class="dashboard-panel admin-section">
+      <div class="panel-header">
+        <h2>All Users</h2>
+        <span>Admin Control</span>
+      </div>
+
+      <input type="text" id="userSearch" placeholder="Search users..." class="admin-search" />
+      <div class="table-wrapper">
+        <table class="application-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (users && users.length > 0) { %>
+              <% users.forEach(user => { %>
+                <tr>
+                  <td><%= user.fullName %></td>
+                  <td><%= user.email %></td>
+                  <td>
+                    <span class="status <%= user.role === 'admin' ? 'selected' : 'applied' %>">
+                      <%= user.role %>
+                    </span>
+                  </td>
+                  <td>
+                    <%= user.createdAt ? user.createdAt.toISOString().split("T")[0] : "N/A" %>
+                  </td>
+                  <td>
+                    <% if (user.role !== "admin") { %>
+                      <form
+                        action="/admin/user/delete/<%= user._id %>"
+                        method="POST"
+                        onsubmit="return confirm('Delete this user?')"
+                      >
+                        <button type="submit" class="small-btn delete-btn">
+                          Delete
+                        </button>
+                      </form>
+                    <% } else { %>
+                      <span>Protected</span>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="5">No users found.</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="applications-section" class="dashboard-panel admin-section">
+      <div class="panel-header">
+        <h2>All Applications</h2>
+        <span>Platform Data</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="application-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% if (applications && applications.length > 0) { %>
+              <% applications.forEach(app => { %>
+                <tr>
+                  <td><%= app.user ? app.user.fullName : "Deleted User" %></td>
+                  <td><%= app.companyName %></td>
+                  <td><%= app.jobRole %></td>
+                  <td>
+  <form
+    action="/admin/application/status/<%= app._id %>"
+    method="POST"
+  >
+    <select
+      name="status"
+      class="status-select"
+      onchange="this.form.submit()"
+    >
+      <option value="Applied"
+        <%= app.status === "Applied" ? "selected" : "" %>>
+        Applied
+      </option>
+
+      <option value="Interview"
+        <%= app.status === "Interview" ? "selected" : "" %>>
+        Interview
+      </option>
+
+      <option value="Selected"
+        <%= app.status === "Selected" ? "selected" : "" %>>
+        Selected
+      </option>
+
+      <option value="Rejected"
+        <%= app.status === "Rejected" ? "selected" : "" %>>
+        Rejected
+      </option>
+    </select>
+  </form>
+</td>
+                  <td>
+                    <%= app.appliedDate ? app.appliedDate.toISOString().split("T")[0] : "N/A" %>
+                  </td>
+                  <td>
+                    <form
+                      action="/admin/application/delete/<%= app._id %>"
+                      method="POST"
+                      onsubmit="return confirm('Delete application?')"
+                    >
+                      <button type="submit" class="small-btn delete-btn">
+                        Delete
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="6">No applications found.</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/admin-dashboard.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

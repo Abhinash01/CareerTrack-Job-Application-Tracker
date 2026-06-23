@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Login | CareerTrack</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+
+<body>
+
+<section class="admin-login-page">
+
+  <div class="admin-login-card">
+
+    <div class="admin-login-logo">
+      CT
+    </div>
+
+    <h1>Admin Portal</h1>
+
+    <p>
+      Secure access for CareerTrack administrators.
+    </p>
+
+    <% if(typeof error !== "undefined"){ %>
+
+      <div class="error-box">
+        <%= error %>
+      </div>
+
+    <% } %>
+
+    <form action="/admin/login" method="POST">
+
+      <div class="input-group">
+        <label>Email</label>
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter admin email"
+          required
+        >
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="auth-btn">
+        Login as Admin
+      </button>
+
+    </form>
+
+    <div class="admin-login-features">
+
+      <div>
+        <h3>👥 User Management</h3>
+        <p>Manage all platform users.</p>
+      </div>
+
+      <div>
+        <h3>📄 Applications</h3>
+        <p>Monitor job applications.</p>
+      </div>
+
+      <div>
+        <h3>📊 Analytics</h3>
+        <p>Track platform growth.</p>
+      </div>
+
+    </div>
+
+    <a href="/" class="admin-back-link">
+      ← Back to CareerTrack
+    </a>
+
+  </div>
+
+</section>
+
+</body>
+</html>

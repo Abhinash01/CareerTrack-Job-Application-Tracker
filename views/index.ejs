@@ -19,51 +19,106 @@
   <%- include("./partials/public-navbar") %>
 <% } %>
 
-  <section class="hero">
-    <div class="hero-content">
-      <p class="tagline">Track. Apply. Succeed.</p>
-      <h1>Manage Every Job Application in One Smart Dashboard</h1>
-      <p class="hero-text">
-        CareerTrack helps students and job seekers track applications, interviews,
-        offers, rejections, reminders, and progress — all in one place.
-      </p>
+<section class="hero premium-hero">
 
-      <div class="hero-buttons">
-        <a href="/register" class="primary-btn">Start Tracking</a>
-        <a href="/dashboard" class="secondary-btn">View Demo</a>
+  <div class="hero-content">
+    <p class="tagline">🚀 Smart Career Management Platform</p>
+
+    <h1>
+      Track every job application <span>smarter & faster.</span>
+    </h1>
+
+    <p class="hero-text">
+      CareerTrack helps you manage job applications, interview schedules,
+      status updates, offers, rejections and career progress from one modern dashboard.
+    </p>
+
+    <div class="hero-buttons">
+      <% if (typeof userLoggedIn !== "undefined" && userLoggedIn) { %>
+        <a href="/dashboard" class="primary-btn">Go to Dashboard</a>
+        <a href="/applications" class="secondary-btn">View Applications</a>
+      <% } else { %>
+        <a href="/register" class="primary-btn">Get Started Free</a>
+        <a href="/login" class="secondary-btn">Login</a>
+      <% } %>
+    </div>
+
+    <div class="hero-mini-stats">
+      <div>
+        <h3>500+</h3>
+        <p>Applications Tracked</p>
+      </div>
+
+      <div>
+        <h3>120+</h3>
+        <p>Interviews Managed</p>
+      </div>
+
+      <div>
+        <h3>95%</h3>
+        <p>Better Organization</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="floating-card card-one">
+      <span>📄</span>
+      <div>
+        <h4>Google</h4>
+        <p>Frontend Intern • Applied</p>
       </div>
     </div>
 
-    <div class="hero-card">
-      <h3>Application Overview</h3>
+    <div class="floating-card card-two">
+      <span>🎤</span>
+      <div>
+        <h4>Microsoft</h4>
+        <p>Interview Scheduled</p>
+      </div>
+    </div>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h2>24</h2>
-          <p>Total Applied</p>
+    <div class="floating-card card-three">
+      <span>🏆</span>
+      <div>
+        <h4>StartupX</h4>
+        <p>Selected Opportunity</p>
+      </div>
+    </div>
+
+    <div class="hero-dashboard-card">
+      <div class="preview-top">
+        <div>
+          <h3>Career Progress</h3>
+          <p>This Month</p>
         </div>
-        <div class="stat-card">
-          <h2>8</h2>
+        <span>Live</span>
+      </div>
+
+      <div class="hero-progress">
+        <div>
+          <p>Applications</p>
+          <strong>24</strong>
+        </div>
+        <div>
           <p>Interviews</p>
+          <strong>08</strong>
         </div>
-        <div class="stat-card">
-          <h2>3</h2>
-          <p>Offers</p>
-        </div>
-        <div class="stat-card">
-          <h2>5</h2>
-          <p>Rejected</p>
+        <div>
+          <p>Selected</p>
+          <strong>03</strong>
         </div>
       </div>
 
-      <div class="progress-box">
-        <p>Monthly Progress</p>
-        <div class="progress-bar">
-          <span></span>
-        </div>
+      <div class="mini-bars">
+        <div><span style="width: 85%;"></span></div>
+        <div><span style="width: 60%;"></span></div>
+        <div><span style="width: 35%;"></span></div>
       </div>
     </div>
-  </section>
+  </div>
+
+</section>
 
   <section class="features" id="features">
     <div class="section-title">

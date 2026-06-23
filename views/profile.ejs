@@ -36,7 +36,9 @@
         <span>CareerTrack User</span>
         <span>Job Tracker</span>
       </div>
-
+        <% if (userRole === "admin") { %>
+          <a href="/admin/dashboard" class="admin-access-btn">🛡 Admin Panel</a>
+<% } %>
       <a href="/auth/logout" class="secondary-btn logout-link">Logout</a>
     </div>
 

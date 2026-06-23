@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
 
     if (!email || !password) {
       return res.status(400).render("login", {
@@ -70,11 +70,16 @@ const loginUser = async (req, res) => {
 
     req.session.userId = user._id;
     req.session.userName = user.fullName;
+    req.session.userRole = user.role;
 
-    if (req.body.rememberMe) {
+    if (rememberMe) {
       req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
     } else {
       req.session.cookie.expires = false;
+    }
+
+    if (user.role === "admin") {
+      return res.redirect("/admin/dashboard");
     }
 
     res.redirect("/dashboard");
@@ -85,7 +90,6 @@ const loginUser = async (req, res) => {
     });
   }
 };
-
 
 const forgotPasswordPage = (req, res) => {
   res.render("forgot-password");

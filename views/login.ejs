@@ -85,7 +85,11 @@
       <p>Login to continue your career journey.</p>
     </div>
 
-   
+   <% if (typeof error !== "undefined") { %>
+  <div class="error-box">
+    <%= error %>
+  </div>
+<% } %>
 
     <form id="loginForm" action="/auth/login" method="POST">
 
@@ -125,6 +129,11 @@
       </button>
 
     </form>
+    <div class="admin-login-link">
+  <a href="/admin/login">
+    🛡 Admin Login
+  </a>
+</div>
 
     <div class="auth-footer">
       <p>

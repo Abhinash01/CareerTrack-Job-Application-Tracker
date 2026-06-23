@@ -1,4 +1,8 @@
+console.log("UPDATED SERVER FILE RUNNING");
 require("dotenv").config();
+
+const apiRoutes = require("./routes/apiRoutes");
+const loggerMiddleware = require("./middleware/loggerMiddleware");
 
 const { getProfile } = require("./controllers/profileController");
 
@@ -11,6 +15,7 @@ const protectRoute = require("./middleware/authMiddleware");
 
 const authRoutes = require("./routes/authRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const {
   getDashboard
@@ -38,12 +43,15 @@ app.use(
 app.use((req, res, next) => {
   res.locals.userLoggedIn = !!req.session.userId;
   res.locals.userName = req.session.userName || null;
+  res.locals.userRole = req.session.userRole || null;
   next();
-});
+}); 
 
 // Body Parser Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(loggerMiddleware);
 
 // Static Files
 app.use(express.static(path.join(__dirname, "../public")));
@@ -55,6 +63,13 @@ app.set("views", path.join(__dirname, "../views"));
 // Routes Middleware
 app.use("/auth", authRoutes);
 app.use("/application", protectRoute, applicationRoutes);
+app.use("/api", apiRoutes);
+app.use("/admin", adminRoutes);
+
+app.get("/test-api", (req, res) => {
+  res.send("API test working");
+});
+
 
 // Public Page Routes
 app.get("/", (req, res) => {

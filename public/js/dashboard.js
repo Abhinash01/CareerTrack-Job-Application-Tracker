@@ -1,40 +1,41 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const statusChart = document.getElementById("statusChart");
+document.querySelectorAll(".dash-card h2").forEach((counter) => {
+  const originalText = counter.textContent.trim();
 
-  if (!statusChart) return;
+  const hasPercent = originalText.includes("%");
+  const target = parseInt(originalText.replace("%", ""));
 
-  const applied = Number(statusChart.dataset.applied);
-  const interview = Number(statusChart.dataset.interview);
-  const selected = Number(statusChart.dataset.selected);
-  const total = Number(statusChart.dataset.total);
+  if (isNaN(target)) return;
 
-  new Chart(statusChart, {
-    type: "doughnut",
-    data: {
-      labels: ["Applied", "Interview", "Selected"],
-      datasets: [
-        {
-          data: [applied, interview, selected],
-          backgroundColor: [
-            "#3b82f6",
-            "#f59e0b",
-            "#10b981"
-          ],
-          borderWidth: 0
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: `Total Applications: ${total}`
-        },
-        legend: {
-          position: "bottom"
-        }
-      }
+  let count = 0;
+  const increment = Math.max(1, Math.ceil(target / 25));
+
+  const updateCounter = () => {
+    count += increment;
+
+    if (count >= target) {
+      counter.textContent = hasPercent ? `${target}%` : target;
+      return;
     }
-  });
+
+    counter.textContent = hasPercent ? `${count}%` : count;
+
+    requestAnimationFrame(updateCounter);
+  };
+
+  updateCounter();
 });
+
+const quoteText = document.getElementById("quoteText");
+const quoteAuthor = document.getElementById("quoteAuthor");
+
+if (quoteText && quoteAuthor) {
+  fetch("/api/quote")
+    .then((res) => res.json())
+    .then((data) => {
+      quoteText.textContent = `"${data.quote}"`;
+      quoteAuthor.textContent = `— ${data.author}`;
+    })
+    .catch(() => {
+      quoteText.textContent = "Unable to load quote.";
+    });
+}
