@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/responsive.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 
@@ -85,11 +86,7 @@
       <p>Login to continue your career journey.</p>
     </div>
 
-   <% if (typeof error !== "undefined") { %>
-  <div class="error-box">
-    <%= error %>
-  </div>
-<% } %>
+ 
 
     <form id="loginForm" action="/auth/login" method="POST">
 
@@ -149,6 +146,22 @@
 <%- include("./partials/footer") %>
 
 
+
+<script>
+
+window.successMessage = "<%= success && success.length ? success[0] : '' %>";
+window.errorMessage = "<%= error && error.length ? error[0] : '' %>";
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if(urlParams.get("logout")){
+    window.successMessage = "Logged Out Successfully 👋";
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="/js/toast.js"></script>
 <script src="/js/auth.js"></script>
 
 </body>

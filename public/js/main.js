@@ -7,11 +7,12 @@ const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
 if (menuBtn && navLinks) {
+
   menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
 
-    navLinks.classList.toggle("active");
     menuBtn.classList.toggle("active");
+    navLinks.classList.toggle("active"); // Missing tha
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
@@ -27,6 +28,7 @@ if (menuBtn && navLinks) {
       menuBtn.classList.remove("active");
     }
   });
+
 }
 
 // Dark Mode

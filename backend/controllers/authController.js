@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
+const transporter = require("../config/mail");
 
 const registerUser = async (req, res) => {
   try {
@@ -27,13 +28,56 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({
-      fullName,
-      email,
-      password: hashedPassword
-    });
+const newUser = await User.create({
+  fullName,
+  email,
+  password: hashedPassword
+});
 
+try {
+  await transporter.sendMail({
+    from: `"CareerTrack" <${process.env.EMAIL_USER}>`,
+    to: newUser.email,
+    subject: "🎉 Welcome to CareerTrack!",
+    html: `
+      <div style="font-family:Arial,sans-serif;padding:20px;">
+        <h2>Welcome, ${newUser.fullName} 👋</h2>
+
+        <p>Thank you for registering on <b>CareerTrack</b>.</p>
+
+        <p>You can now:</p>
+
+        <ul>
+          <li>Track job applications</li>
+          <li>Monitor interview progress</li>
+          <li>Stay organized during your job search</li>
+        </ul>
+
+        <br>
+
+        <a href="https://careertrack-g51h.onrender.com/login"
+        style="background:#6C63FF;color:#fff;padding:12px 25px;border-radius:8px;text-decoration:none;">
+        Login Now
+        </a>
+
+        <br><br>
+
+        <p>Happy Job Hunting 🚀</p>
+
+        <p><b>CareerTrack Team</b></p>
+      </div>
+    `
+  });
+
+} catch (err) {
+  console.log("Email Error:", err.message);
+}
+
+req.flash("success", "Registration Successful! Welcome to CareerTrack 🚀");
+
+return req.session.save(() => {
     res.redirect("/login");
+});
   } catch (error) {
     console.error(error);
     res.status(500).render("register", {
@@ -54,19 +98,17 @@ const loginUser = async (req, res) => {
 
     const user = await User.findOne({ email });
 
-    if (!user) {
-      return res.status(400).render("login", {
-        error: "Invalid email or password."
-      });
-    }
+if (!user) {
+  req.flash("error", "Invalid Email or Password");
+  return res.redirect("/login");
+}
 
     const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      return res.status(400).render("login", {
-        error: "Invalid email or password."
-      });
-    }
+if (!isMatch) {
+  req.flash("error", "Invalid Email or Password");
+  return res.redirect("/login");
+}
 
     req.session.userId = user._id;
     req.session.userName = user.fullName;
@@ -78,11 +120,15 @@ const loginUser = async (req, res) => {
       req.session.cookie.expires = false;
     }
 
-    if (user.role === "admin") {
-      return res.redirect("/admin/dashboard");
-    }
+if (user.role === "admin") {
+  req.flash("success", "Welcome Admin 👋");
+  return res.redirect("/admin/dashboard");
+}
 
+req.flash("success", `Welcome back, ${user.fullName}! 👋`);
+return req.session.save(() => {
     res.redirect("/dashboard");
+});
   } catch (error) {
     console.error(error);
     res.status(500).render("login", {
@@ -125,7 +171,11 @@ const forgotPassword = async (req, res) => {
 
     await user.save();
 
+    req.flash("success", "Password Updated Successfully ✅");
+
+return req.session.save(() => {
     res.redirect("/login");
+});
 
   } catch (error) {
     console.error(error);
@@ -138,15 +188,20 @@ const forgotPassword = async (req, res) => {
 
 
 const logoutUser = (req, res) => {
+
   req.session.destroy((error) => {
+
     if (error) {
       console.error(error);
       return res.redirect("/dashboard");
     }
 
     res.clearCookie("connect.sid");
-    res.redirect("/login");
+
+    return res.redirect("/login?logout=1");
+
   });
+
 };
 
 module.exports = {

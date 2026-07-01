@@ -1,4 +1,6 @@
 const Application = require("../models/Application");
+const User = require("../models/User");
+const transporter = require("../config/mail");
 
 const addApplication = async (req, res) => {
   try {
@@ -22,22 +24,100 @@ const addApplication = async (req, res) => {
       });
     }
 
-    await Application.create({
-      user: req.session.userId,
-      companyName,
-      jobRole,
-      jobType,
-      location,
-      salary,
-      status,
-      appliedDate,
-      interviewDate: interviewDate || null,
-      source,
-      priority,
-      notes
-    });
+const application = await Application.create({
+  user: req.session.userId,
+  companyName,
+  jobRole,
+  jobType,
+  location,
+  salary,
+  status,
+  appliedDate,
+  interviewDate: interviewDate || null,
+  source,
+  priority,
+  notes
+});
 
-    res.redirect("/applications");
+try {
+
+  const user = await User.findById(req.session.userId);
+
+  await transporter.sendMail({
+    from: `"CareerTrack" <${process.env.EMAIL_USER}>`,
+    to: user.email,
+    subject: `Application Added - ${companyName}`,
+    html: `
+      <div style="font-family:Arial,sans-serif;padding:25px;max-width:650px;margin:auto">
+
+      <h2 style="color:#6C63FF;">Application Successfully Added ✅</h2>
+
+      <p>Hello <b>${user.fullName}</b>,</p>
+
+      <p>Your job application has been saved successfully in CareerTrack.</p>
+
+      <table style="border-collapse:collapse;width:100%;margin-top:20px">
+
+        <tr>
+          <td><b>Company</b></td>
+          <td>${companyName}</td>
+        </tr>
+
+        <tr>
+          <td><b>Role</b></td>
+          <td>${jobRole}</td>
+        </tr>
+
+        <tr>
+          <td><b>Status</b></td>
+          <td>${status}</td>
+        </tr>
+
+        <tr>
+          <td><b>Location</b></td>
+          <td>${location}</td>
+        </tr>
+
+        <tr>
+          <td><b>Priority</b></td>
+          <td>${priority}</td>
+        </tr>
+
+      </table>
+
+      ${
+        interviewDate
+          ? `
+      <div style="margin-top:25px;padding:15px;background:#E8F5E9;border-left:5px solid green;">
+      <b>Interview Scheduled</b><br>
+      ${new Date(interviewDate).toDateString()}
+      </div>
+      `
+          : ""
+      }
+
+      <br>
+
+      <a href="http://localhost:5000/dashboard"
+      style="background:#6C63FF;color:white;padding:12px 25px;text-decoration:none;border-radius:8px;">
+      Open Dashboard
+      </a>
+
+      <br><br>
+
+      <p>Good Luck with your application! 🚀</p>
+
+      <p><b>CareerTrack Team</b></p>
+
+      </div>
+    `
+  });
+
+} catch (err) {
+  console.log("Mail Error:", err.message);
+}
+
+res.redirect("/applications");
   } catch (error) {
     console.error(error);
     res.status(500).render("add-application", {

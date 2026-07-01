@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -27,13 +28,7 @@
       Secure access for CareerTrack administrators.
     </p>
 
-    <% if(typeof error !== "undefined"){ %>
 
-      <div class="error-box">
-        <%= error %>
-      </div>
-
-    <% } %>
 
     <form action="/admin/login" method="POST">
 
@@ -65,24 +60,7 @@
 
     </form>
 
-    <div class="admin-login-features">
-
-      <div>
-        <h3>👥 User Management</h3>
-        <p>Manage all platform users.</p>
-      </div>
-
-      <div>
-        <h3>📄 Applications</h3>
-        <p>Monitor job applications.</p>
-      </div>
-
-      <div>
-        <h3>📊 Analytics</h3>
-        <p>Track platform growth.</p>
-      </div>
-
-    </div>
+    
 
     <a href="/" class="admin-back-link">
       ← Back to CareerTrack
@@ -91,6 +69,7 @@
   </div>
 
 </section>
-
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="/js/toast.js"></script>
 </body>
 </html>

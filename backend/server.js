@@ -1,34 +1,45 @@
 console.log("UPDATED SERVER FILE RUNNING");
 require("dotenv").config();
 
-const apiRoutes = require("./routes/apiRoutes");
-const loggerMiddleware = require("./middleware/loggerMiddleware");
-
-const { getProfile } = require("./controllers/profileController");
-
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const connectDB = require("./config/db");
+
+const loggerMiddleware = require("./middleware/loggerMiddleware");
 const protectRoute = require("./middleware/authMiddleware");
 
+const apiRoutes = require("./routes/apiRoutes");
 const authRoutes = require("./routes/authRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
-const {
-  getDashboard
-} = require("./controllers/applicationController");
+const { getDashboard } = require("./controllers/applicationController");
+const { getProfile } = require("./controllers/profileController");
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-// Database Connection
+// ============================
+// Database
+// ============================
+
 connectDB();
 
-// Session Middleware
+// ============================
+// Body Parser
+// ============================
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// ============================
+// Session
+// ============================
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "careertracksecret",
@@ -40,38 +51,57 @@ app.use(
   })
 );
 
+// ============================
+// Flash Messages
+// ============================
+
+app.use(flash());
+
+// ============================
+// Global Variables
+// ============================
+
 app.use((req, res, next) => {
+
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+
   res.locals.userLoggedIn = !!req.session.userId;
   res.locals.userName = req.session.userName || null;
   res.locals.userRole = req.session.userRole || null;
-  next();
-}); 
 
-// Body Parser Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+  next();
+
+});
+
+// ============================
+// Middlewares
+// ============================
 
 app.use(loggerMiddleware);
 
-// Static Files
 app.use(express.static(path.join(__dirname, "../public")));
 
-// EJS Setup
+// ============================
+// View Engine
+// ============================
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
-// Routes Middleware
+// ============================
+// Routes
+// ============================
+
 app.use("/auth", authRoutes);
 app.use("/application", protectRoute, applicationRoutes);
 app.use("/api", apiRoutes);
 app.use("/admin", adminRoutes);
 
-app.get("/test-api", (req, res) => {
-  res.send("API test working");
-});
+// ============================
+// Public Pages
+// ============================
 
-
-// Public Page Routes
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -100,7 +130,10 @@ app.get("/privacy", (req, res) => {
   res.render("privacy");
 });
 
-// Protected Page Routes
+// ============================
+// Protected Pages
+// ============================
+
 app.get("/dashboard", protectRoute, getDashboard);
 
 app.get("/applications", protectRoute, (req, res) => {
@@ -112,13 +145,24 @@ app.get("/add-application", protectRoute, (req, res) => {
 });
 
 app.get("/profile", protectRoute, getProfile);
-// Test Form Submission - Cognifyz Task 1
+
+// ============================
+// Test Route
+// ============================
+
+app.get("/test-api", (req, res) => {
+  res.send("API test working");
+});
+
 app.post("/submit-test", (req, res) => {
   console.log(req.body);
   res.send("Form submitted successfully using Express server!");
 });
 
+// ============================
+// Server
+// ============================
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-

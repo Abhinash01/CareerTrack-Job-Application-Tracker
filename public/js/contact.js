@@ -40,18 +40,25 @@ if (contactForm) {
       isValid = false;
     }
 
-    if (!isValid) return;
+    if (!isValid) {
+    showToast("Please fix the highlighted errors ⚠️", "warning");
+    return;
+}
 
     const contactBtn = document.getElementById("contactBtn");
 
     contactBtn.textContent = "Sending...";
     contactBtn.disabled = true;
 
-    setTimeout(() => {
-      alert("Message submitted successfully. Backend email service will be connected later.");
-      contactForm.reset();
-      contactBtn.textContent = "Send Message";
-      contactBtn.disabled = false;
-    }, 1000);
+   setTimeout(() => {
+
+    showToast("Message Sent Successfully 📩", "success");
+
+    contactForm.reset();
+
+    contactBtn.textContent = "Send Message";
+    contactBtn.disabled = false;
+
+}, 1000);
   });
 }

@@ -1,4 +1,3 @@
-
 <footer class="footer">
   <div>
     <h3>Career<span>Track</span></h3>
@@ -15,9 +14,23 @@
   <p class="copyright">
     © 2026 CareerTrack. All Rights Reserved.
   </p>
+</footer>
 
- 
-</footer> 
+<!-- Toast Messages -->
+<script>
+window.successMessage = "<%= success && success.length ? success[0] : '' %>";
+window.errorMessage = "<%= error && error.length ? error[0] : '' %>";
+</script>
 
-  <script src="/js/main.js"></script>
- 
+<!-- Toastify CSS -->
+<link rel="stylesheet.css"
+href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+<!-- Toastify JS -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<!-- Custom Toast -->
+<script src="/js/toast.js"></script>
+
+<!-- Main JS -->
+<script src="/js/main.js"></script>

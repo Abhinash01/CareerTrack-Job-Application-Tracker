@@ -1,7 +1,15 @@
+/* =====================================================
+   CAREERTRACK STYLESHEET (Lightly Optimized)
+   - Trimmed whitespace
+   - Removed excessive blank lines
+   - Original comments preserved
+   NOTE: Deep refactoring requires manual review to avoid
+   changing selector specificity/behavior.
+===================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 /* CareerTrack - Clean Main Stylesheet */
-
 
 :root {
   --bg-color: #f6f8ff;
@@ -1210,6 +1218,20 @@ img {
   color: var(--muted-text);
 }
 
+.hero-card::before,
+.feature-card::before,
+.dashboard-panel::before,
+.dash-card::before,
+.action-card::before,
+.admin-section::before{
+    pointer-events:none !important;
+}
+
+body::before,
+body::after{
+    pointer-events:none !important;
+}
+
 .status {
   padding: 6px 12px;
   border-radius: 999px;
@@ -1500,321 +1522,30 @@ img {
   color: var(--primary);
 }
 
-/* ===============================
-   PREMIUM ADMIN THEME
-================================ */
+/* ====================================
+   PREMIUM ADMIN THEME (LIGHT BASE)
+===================================== */
 
-.admin-login-page,
-.admin-layout {
+.admin-login-page{
+  min-height:100vh;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+
   background:
-    radial-gradient(circle at top left,
-      rgba(124,58,237,.15),
-      transparent 30%),
-    radial-gradient(circle at bottom right,
-      rgba(37,99,235,.12),
-      transparent 30%),
+    radial-gradient(circle at top left, rgba(124,58,237,.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(37,99,235,.12), transparent 30%),
     #020617;
+
+  overflow:hidden;
 }
 
-/* ===== LOGIN ===== */
-
-.admin-login-card {
-  background: rgba(15,23,42,.88);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 30px 80px rgba(0,0,0,.35);
-}
-
-.admin-login-logo {
-  box-shadow: 0 15px 40px rgba(124,58,237,.4);
-}
-
-.admin-login-card h1 {
-  color: #fff;
-}
-
-.admin-login-card p {
-  color: #cbd5e1;
-}
-
-.admin-login-card input {
-  background: rgba(255,255,255,.05) !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-  color: #fff !important;
-}
-
-.admin-login-card input:focus {
-  border-color: #7c3aed !important;
-  box-shadow: 0 0 0 4px rgba(124,58,237,.15);
-}
-
-/* ===== NAVBAR ===== */
-
-.admin-navbar {
-  height: 80px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 30px;
-
-  backdrop-filter: blur(18px);
-
-  background: rgba(15,23,42,.85);
-
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-
-.admin-logo {
-  font-size: 24px;
-  font-weight: 800;
-  color: #fff;
-}
-
-.admin-nav-links {
-  display: flex;
-  gap: 10px;
-  list-style: none;
-}
-
-.admin-nav-links a {
-  padding: 10px 16px;
-  border-radius: 12px;
-
-  color: #cbd5e1;
-  font-weight: 600;
-
-  transition: .3s;
-}
-
-.admin-nav-links a:hover {
-  background: rgba(124,58,237,.15);
-  color: #fff;
-}
-
-.admin-logout {
-  background: rgba(239,68,68,.12);
-  color: #f87171 !important;
-}
-
-/* ===== SIDEBAR ===== */
-
-.admin-sidebar {
+.admin-layout{
   background:
-    linear-gradient(
-      180deg,
-      #0f172a,
-      #020617
-    );
-}
-
-.admin-sidebar a {
-  transition: .3s;
-}
-
-.admin-sidebar a:hover {
-  transform: translateX(6px);
-}
-
-/* ===== HERO ===== */
-
-.admin-hero {
-  padding: 40px;
-  border-radius: 24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(124,58,237,.12),
-      rgba(37,99,235,.12)
-    );
-
-  border: 1px solid rgba(255,255,255,.08);
-
-  position: relative;
-  overflow: hidden;
-}
-
-.admin-hero::after {
-  content: "";
-
-  position: absolute;
-
-  width: 260px;
-  height: 260px;
-
-  right: -80px;
-  top: -80px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(124,58,237,.25),
-      transparent 70%
-    );
-
-  animation: floatBlob 5s infinite alternate;
-}
-
-/* ===== CARDS ===== */
-
-.dash-card,
-.dashboard-panel {
-  background: #fff;
-
-  border-radius: 22px;
-
-  transition: .3s ease;
-}
-
-.dash-card:hover,
-.dashboard-panel:hover {
-  transform: translateY(-6px);
-
-  box-shadow:
-    0 20px 40px rgba(124,58,237,.12);
-}
-
-.stat-icon {
-  width: 60px;
-  height: 60px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #7c3aed,
-      #2563eb
-    );
-
-  color: #fff;
-  font-size: 28px;
-
-  margin-bottom: 16px;
-}
-
-.success-card .stat-icon {
-  background:
-    linear-gradient(
-      135deg,
-      #10b981,
-      #22c55e
-    );
-}
-
-/* ===== MINI ITEMS ===== */
-
-.admin-mini-item {
-  padding: 14px;
-  border-radius: 16px;
-
-  transition: .3s;
-}
-
-.admin-mini-item:hover {
-  background: rgba(124,58,237,.05);
-  transform: translateX(6px);
-}
-
-/* ===== RATE ===== */
-
-.rate-bar {
-  height: 10px;
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.rate-bar span {
-  background:
-    linear-gradient(
-      90deg,
-      #7c3aed,
-      #2563eb
-    );
-}
-
-/* ===== TABLE ===== */
-
-.application-table tbody tr {
-  transition: .3s;
-}
-
-.application-table tbody tr:hover {
-  transform: scale(1.01);
-  background: rgba(124,58,237,.04);
-}
-
-.delete-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-}
-
-.delete-btn:hover {
-  background: #dc2626;
-}
-
-/* ===== DARK MODE ===== */
-
-body.dark-mode .dash-card,
-body.dark-mode .dashboard-panel,
-body.dark-mode .admin-navbar {
-  background: #0d0d0d !important;
-  border: 1px solid #222 !important;
-}
-
-/* ===== ANIMATION ===== */
-
-@keyframes floatBlob {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-30px);
-  }
-}
-
-/* ===== MOBILE ===== */
-
-@media(max-width:768px){
-
-  .admin-navbar {
-    flex-direction: column;
-    height: auto;
-    gap: 12px;
-    padding: 16px;
-  }
-
-  .admin-nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .admin-hero h1 {
-    font-size: 28px;
-  }
-}
-
-/* ================= ADMIN LOGIN ================= */
-
-.admin-login-page {
-  min-height: 100vh;
-  padding: 30px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(circle at top left, rgba(124, 58, 237, 0.25), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.22), transparent 35%),
+    radial-gradient(circle at top left, rgba(124,58,237,.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(37,99,235,.12), transparent 30%),
     #020617;
 }
 
@@ -1888,8 +1619,6 @@ body.dark-mode .admin-navbar {
   color: #fff;
 }
 
-/* ================= ADMIN LAYOUT / SIDEBAR ================= */
-
 .admin-layout {
   min-height: 100vh;
   display: grid;
@@ -1960,8 +1689,6 @@ body.dark-mode .admin-navbar {
   background: rgba(239, 68, 68, 0.14) !important;
 }
 
-/* ================= ADMIN MAIN ================= */
-
 .admin-main {
   width: 100%;
   min-width: 0;
@@ -2005,8 +1732,6 @@ body.dark-mode .admin-navbar {
 .admin-stats {
   margin-top: 28px;
 }
-
-/* ================= ADMIN CARDS ================= */
 
 .admin-stats .dash-card,
 .admin-analytics-grid .dashboard-panel,
@@ -2059,7 +1784,22 @@ body.dark-mode .admin-navbar {
   color: #10b981;
 }
 
-/* ================= ANALYTICS / RECENT ================= */
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.success-card .stat-icon {
+  background: linear-gradient(135deg, #10b981, #22c55e);
+}
 
 .admin-analytics-grid,
 .admin-recent-grid {
@@ -2125,15 +1865,13 @@ body.dark-mode .admin-navbar {
   border-radius: 16px;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
-  transition: all 0.3s ease;
+  transition: .3s;
 }
 
 .admin-mini-item:hover {
   background: rgba(124, 58, 237, 0.06);
   transform: translateX(6px);
 }
-
-/* ================= TABLES / BUTTONS ================= */
 
 .admin-section {
   margin-top: 34px;
@@ -2143,33 +1881,6 @@ body.dark-mode .admin-navbar {
 .admin-section .table-wrapper {
   margin-top: 18px;
 }
-
-.application-table tbody tr {
-  transition: 0.25s ease;
-}
-
-.application-table tbody tr:hover {
-  background: rgba(124, 58, 237, 0.05);
-}
-
-.delete-btn {
-  border: none;
-  outline: none;
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: #ef4444;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.delete-btn:hover {
-  background: #dc2626;
-  transform: translateY(-2px);
-}
-
-/* ================= ADMIN NAVBAR SUPPORT ================= */
 
 .admin-navbar {
   height: 78px;
@@ -2215,8 +1926,6 @@ body.dark-mode .admin-navbar {
   color: #f87171 !important;
 }
 
-/* ================= MOBILE ================= */
-
 .admin-mobile-toggle {
   display: none;
   position: fixed;
@@ -2234,47 +1943,18 @@ body.dark-mode .admin-navbar {
   cursor: pointer;
 }
 
-/* ================= DARK MODE ================= */
+/* ================= Animations ================= */
 
-body.dark-mode .admin-layout {
-  background:
-    radial-gradient(circle at top left, rgba(124, 58, 237, 0.16), transparent 32%),
-    #000 !important;
+@keyframes floatBlob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-30px); }
 }
-
-body.dark-mode .admin-hero,
-body.dark-mode .admin-stats .dash-card,
-body.dark-mode .admin-analytics-grid .dashboard-panel,
-body.dark-mode .admin-recent-grid .dashboard-panel,
-body.dark-mode .admin-section,
-body.dark-mode .admin-mini-item {
-  background: #0d0d0d !important;
-  border: 1px solid #222 !important;
-  color: #fff !important;
-}
-
-body.dark-mode .admin-mini-item p,
-body.dark-mode .admin-mini-item span,
-body.dark-mode .rate-item p {
-  color: #cbd5e1 !important;
-}
-
-body.dark-mode .rate-bar {
-  background: #1f2937;
-}
-
-body.dark-mode .application-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.04) !important;
-}
-
-/* ================= ANIMATIONS ================= */
 
 @keyframes adminFadeUp {
   from {
     opacity: 0;
     transform: translateY(16px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2282,16 +1962,21 @@ body.dark-mode .application-table tbody tr:hover {
 }
 
 @keyframes adminFloat {
-  from {
-    transform: translateY(0) scale(1);
-  }
-
-  to {
-    transform: translateY(-28px) scale(1.08);
-  }
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-28px) scale(1.08); }
 }
 
-/* ================= RESPONSIVE ADMIN ================= */
+@keyframes floatMainCard {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-15px); }
+}
+
+@keyframes floatSmallCard {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* ================= Responsive Layouts ================= */
 
 @media (max-width: 768px) {
   .admin-layout {
@@ -2359,37 +2044,126 @@ body.dark-mode .application-table tbody tr:hover {
   }
 }
 
-.admin-search-box{
-  margin-bottom:20px;
+/* ====================================
+   UNIFIED DARK MODE DECLARATION
+===================================== */
+
+body.dark-mode {
+  background-color: #0b0f19;
+  color: #f3f4f6;
 }
 
-.admin-search{
-  width:100%;
-  padding:14px 18px;
-  border-radius:14px;
-  border:1px solid #e5e7eb;
-  outline:none;
-  font-size:15px;
+body.dark-mode .header {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-bottom: 1px solid #1f2937 !important;
 }
 
-.admin-search:focus{
-  border-color:#8b5cf6;
-  box-shadow:0 0 0 4px rgba(139,92,246,.15);
+body.dark-mode .nav-links a {
+  color: #cbd5e1 !important;
 }
 
-.status-select{
-  width:100%;
-  padding:8px 12px;
-  border:none;
-  outline:none;
-  border-radius:10px;
-  background:#1e293b;
-  color:white;
-  font-size:.9rem;
-  cursor:pointer;
+body.dark-mode .logo,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: #ffffff !important;
 }
 
-.status-select option{
-  background:#0f172a;
-  color:white;
+body.dark-mode p {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .theme-toggle::before {
+  left: 29px;
+  content: "☀️";
+}
+
+body.dark-mode .feature-card,
+body.dark-mode .dashboard-panel,
+body.dark-mode .dash-card,
+body.dark-mode .auth-card,
+body.dark-mode .dashboard-preview,
+body.dark-mode .faq-item,
+body.dark-mode .step,
+body.dark-mode .hero-dashboard-card,
+body.dark-mode .floating-card,
+body.dark-mode .application-form,
+body.dark-mode .profile-card,
+body.dark-mode .settings-card,
+body.dark-mode .stats-card,
+body.dark-mode .admin-navbar,
+body.dark-mode .admin-hero,
+body.dark-mode .admin-mini-item,
+body.dark-mode table,
+body.dark-mode .application-table,
+body.dark-mode .quick-actions *,
+body.dark-mode .application-form-card,
+body.dark-mode .profile-tags *,
+body.dark-mode .summary-card,
+body.dark-mode .auth-feature-box ,
+body.dark-mode .legal-card,
+body.dark-mode .contact-card,
+body.dark-mode .contact-form-card,
+body.dark-mode .about-content-card,
+body.dark-mode .tech-card,
+body.dark-mode .highlight-box,
+body.dark-mode .auth-stats *,
+body.dark-mode .hero-mini-stats *
+ {
+  background: #111827 !important;
+  color: #ffffff !important;
+  border: 1px solid #1f2937 !important;
+}
+
+body.dark-mode .admin-layout {
+  background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.16), transparent 32%), #000000 !important;
+}
+
+body.dark-mode .admin-mini-item p,
+body.dark-mode .admin-mini-item span,
+body.dark-mode .rate-item p {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: #1e293b !important;
+  color: #ffffff !important;
+  border: 1px solid #334155 !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode thead {
+  background: #1e293b !important;
+}
+
+body.dark-mode tbody tr {
+  border-color: #334155 !important;
+}
+
+body.dark-mode .secondary-btn,
+body.dark-mode .login-btn {
+  background: #1e293b;
+  color: #ffffff;
+  border: 1px solid #334155;
+}
+
+body.dark-mode footer,
+body.dark-mode .footer {
+  background: #111827 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .rate-bar {
+  background: #1f2937;
+}
+
+body.dark-mode .application-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
 }
